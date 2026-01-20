@@ -123,7 +123,7 @@ class Illustrate:
             for i in range(schools.shape[0]):
                 folium.Marker(
                     location=[schools.iloc[i]['latitude'], schools.iloc[i]['longitude']],
-                    tooltip= schools.iloc[i]['school_name'] + ', ' + schools.iloc[i]['level'],
+                    tooltip= schools.iloc[i]['school_name'] + '<br>' + schools.iloc[i]['level'],
                     icon=folium.Icon(prefix='fa', icon='school', icon_size=(0.5,0.5), color='white', icon_color='#504f10')
                 ).add_to(vector)
 
