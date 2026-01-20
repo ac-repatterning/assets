@@ -14,7 +14,7 @@ class Interface:
     Notes<br>
     ------<br>
 
-    Reads-in the assets.
+    Reads-in the codes of all assets in-focus.
     """
 
     def __init__(self, service: sr.Service, s3_parameters: s3p.S3Parameters, arguments: dict):
