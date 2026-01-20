@@ -43,7 +43,7 @@ class Points:
         :return:
         """
 
-        __f_schools = ['catchment_id', 'catchment_name', 'focus', 'latitude', 'longitude', 'school_name'
+        __f_schools = ['catchment_id', 'catchment_name', 'focus', 'latitude', 'longitude', 'school_name',
                        'level', 'local_authority', 'geometry']
 
         schools = self.__schools.copy()
