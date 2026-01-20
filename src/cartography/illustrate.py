@@ -116,7 +116,8 @@ class Illustrate:
                     "radius": custom.f_radius(feature['properties']['gauge_datum'])
                 },
                 zoom_on_click=True,
-                on_each_feature=on_each_feature
+                on_each_feature=on_each_feature,
+                popup=folium.GeoJsonPopup(fields=['railway'])
             ).add_to(vector)
 
             # Schools
