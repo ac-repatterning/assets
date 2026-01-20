@@ -59,9 +59,11 @@ class Points:
         """
 
         __f_reference = ['catchment_id', 'catchment_name', 'focus', 'station_id', 'latitude', 'longitude',
-                         'station_name', 'ts_name', 'river_name', 'gauge_datum', 'geometry']
+                         'station_name', 'ts_name', 'river_name', 'gauge_datum', 'railway', 'geometry']
 
         reference = self.__reference.copy()
+        reference['railway'] = ('https://www.map.signalbox.io/?location=@' + reference['latitude'].astype(str) +
+                               ',' + reference['longitude'].astype(str) + ',10Z')
         reference['focus'] = 'gauge'
 
         return reference[__f_reference]
@@ -78,5 +80,6 @@ class Points:
 
         # Concatenating
         data = pd.concat([care, schools, reference], axis=0, ignore_index=True)
+        data.info()
 
         return data
