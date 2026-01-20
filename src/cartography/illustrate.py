@@ -38,6 +38,20 @@ class Illustrate:
         self.__c_latitude, self.__c_longitude = src.cartography.centroids.Centroids(blob=self.__points).__call__()
         self.__parcels: list[pcl.Parcel] = src.cartography.parcels.Parcels(points=self.__points, codes=codes).exc()
 
+    def __get_focus(self, catchment_id: int, focus: str):
+        """
+
+        :param catchment_id:
+        :param focus: e.g., care homes `elders`, schools `schools`, gauge stations `gauge`
+        :return:
+        """
+
+        __focus: geopandas.GeoDataFrame = self.__points.copy().loc[
+                (self.__points['catchment_id'] == catchment_id) & (self.__points['focus'] == focus), :]
+        __focus.to_crs(epsg=3857, inplace=True)
+
+        return __focus
+
     # pylint: disable=R0915
     def exc(self, _name: str):
         """
@@ -73,16 +87,14 @@ class Illustrate:
         computations = []
         for parcel in self.__parcels:
 
+            # a parcel, i.e., catchment
             show = parcel.visible
             vector = folium.FeatureGroup(name=parcel.catchment_name, show=show)
 
-            # gauges, care homes
-            instances: geopandas.GeoDataFrame = self.__points.copy().loc[
-                        (self.__points['catchment_id'] == parcel.catchment_id) & (self.__points['focus'] == 'gauge'), :]
-            instances.to_crs(epsg=3857, inplace=True)
-            leaves: geopandas.GeoDataFrame = self.__points.copy().loc[
-                     (self.__points['catchment_id'] == parcel.catchment_id) & (self.__points['focus'] == 'elders'), :]
-            leaves.to_crs(epsg=3857, inplace=True)
+            # gauges, care homes, schools
+            instances: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='gauge')
+            leaves: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='elders')
+            schools: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='schools')
 
             # Gauges
             on_each_feature = folium.utilities.JsCode("""
