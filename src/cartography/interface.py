@@ -50,8 +50,6 @@ class Interface:
             care=care, schools=schools, reference=reference).exc()
         logging.info(points)
 
-        '''
         # Draw
         src.cartography.illustrate.Illustrate(
             points=points, coarse=coarse, codes=codes).exc(_name='assets')
-        '''
