@@ -118,7 +118,7 @@ class Illustrate:
                 },
                 zoom_on_click=True,
                 on_each_feature=on_each_feature,
-                popup=folium.GeoJsonPopup(fields=['railway'])
+                popup=folium.GeoJsonPopup(fields=['railway'], aliases=[''])
             ).add_to(vector)
 
             # Schools
