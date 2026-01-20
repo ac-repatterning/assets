@@ -9,14 +9,16 @@ class Points:
     Data
     """
 
-    def __init__(self, care: geopandas.GeoDataFrame, reference: geopandas.GeoDataFrame):
+    def __init__(self, care: geopandas.GeoDataFrame, schools: geopandas.GeoDataFrame, reference: geopandas.GeoDataFrame):
         """
 
         :param care: Care home frame
+        :param schools: Schools
         :param reference: Of gauges
         """
 
         self.__care = care
+        self.__schools = schools
         self.__reference = reference
 
     def __get_care(self) -> geopandas.GeoDataFrame:
@@ -34,6 +36,22 @@ class Points:
         care['focus'] = 'elders'
 
         return care[__f_care]
+
+    def __get_schools(self) -> geopandas.GeoDataFrame:
+        """
+
+        :return:
+        """
+
+        __f_schools = ['catchment_id', 'catchment_name', 'focus', 'latitude', 'longitude', 'school_name'
+                       'level', 'local_authority', 'geometry']
+
+        schools = self.__schools.copy()
+        schools['latitude'] = schools.geometry.apply(lambda k: k.y)
+        schools['longitude'] = schools.geometry.apply(lambda k: k.x)
+        schools['focus'] = 'schools'
+
+        return schools[__f_schools]
 
     def __get_reference(self) -> geopandas.GeoDataFrame:
         """
@@ -56,9 +74,12 @@ class Points:
         """
 
         care = self.__get_care()
+        schools = self.__get_schools()
         reference = self.__get_reference()
 
         # Concatenating
-        data = pd.concat([care, reference], axis=0, ignore_index=True)
+        data = pd.concat([care, schools, reference], axis=0, ignore_index=True)
+        logging.info(data)
+        data.info()
 
         return data
