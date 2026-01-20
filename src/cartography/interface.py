@@ -45,14 +45,10 @@ class Interface:
         schools = self.__maps.exc(key_name='cartography/sch-catchments.geojson')
         reference = src.acquire.reference.Reference(s3_parameters=self.__s3_parameters).exc()
 
-        coarse.info()
-        care.info()
-        schools.info()
-        reference.info()
-
         # Thus far, points vis-à-vis care homes and gauge stations.
         points: geopandas.GeoDataFrame = src.cartography.points.Points(
             care=care, schools=schools, reference=reference).exc()
+        logging.info(points)
 
         '''
         # Draw
