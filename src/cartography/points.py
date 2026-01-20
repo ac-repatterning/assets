@@ -1,5 +1,4 @@
 """Module cartography/points.py"""
-import logging
 import geopandas
 import pandas as pd
 
@@ -79,7 +78,5 @@ class Points:
 
         # Concatenating
         data = pd.concat([care, schools, reference], axis=0, ignore_index=True)
-        logging.info(data)
-        data.info()
 
         return data
