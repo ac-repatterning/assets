@@ -103,7 +103,8 @@ class Illustrate:
                         '<b>' + feature.properties.station_name + '</b><br>' +
                         'Gauge Datum: ' + feature.properties.gauge_datum.toFixed(4) + ' metres<br>' +
                         'River/Water: ' + feature.properties.river_name + '<br>' +
-                        'Catchment: ' + feature.properties.catchment_name + '<br>'
+                        'Catchment: ' + feature.properties.catchment_name + '<br>' +
+                        feature.properties.railway
                     );}""")
 
             folium.GeoJson(
