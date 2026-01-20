@@ -131,7 +131,7 @@ class Illustrate:
             for i in range(leaves.shape[0]):
                 folium.Marker(
                     location=[leaves.iloc[i]['latitude'], leaves.iloc[i]['longitude']],
-                    tooltip=leaves.iloc[i]['organisation'] + '<br>' + leaves.iloc[i]['town'],
+                    tooltip= '<b>' + leaves.iloc[i]['organisation'] + '</b><br>' + leaves.iloc[i]['town'],
                     icon=folium.Icon(prefix='fa', icon='house-flag', icon_size=(0.5,0.5), color='white', icon_color='black')
                 ).add_to(vector)
 
