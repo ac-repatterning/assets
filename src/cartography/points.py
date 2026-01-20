@@ -62,8 +62,8 @@ class Points:
                          'station_name', 'ts_name', 'river_name', 'gauge_datum', 'railway', 'geometry']
 
         reference = self.__reference.copy()
-        reference['railway'] = ('https://www.map.signalbox.io/?location=@' + reference['latitude'].astype(str) +
-                               ',' + reference['longitude'].astype(str) + ',10Z')
+        reference['railway'] = ('<a href="https://www.map.signalbox.io/?location=@' + reference['latitude'].astype(str) +
+                               ',' + reference['longitude'].astype(str) + ',10Z">trains in the vicinity</a>')
         reference['focus'] = 'gauge'
 
         return reference[__f_reference]
