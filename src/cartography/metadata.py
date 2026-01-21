@@ -23,8 +23,9 @@ class Metadata:
                         'Gauge Datum: ' + feature.properties.gauge_datum.toFixed(4) + ' metres<br>' +
                         'River/Water: ' + feature.properties.river_name + '<br>' +
                         'Catchment: ' + feature.properties.catchment_name + '<br><br>' +
-                        'For more about the vicinity of the gauge station click on this icon; ' + 
-                        'the resulting popup has links to hubs that outline live trains, fires, etc., - <b>if applicable/any.</b>'
+                        '<b>For more about the vicinity of the gauge station</b> click on this icon; <br>' + 
+                        'the resulting popup has links to hubs that outline live trains, fires, <br>' + 
+                        'etc., - <b>if applicable/any.</b>'
                     );
                     
                     layer.bindPopup(
