@@ -65,7 +65,7 @@ class Points:
         reference['railway'] = ('<a href="https://www.map.signalbox.io/?location=@' + reference['latitude'].astype(str) +
                                ',' + reference['longitude'].astype(str) + ',10Z" target="_blank">trains in the vicinity</a>')
         reference['fire'] = ('<a href="https://firms.modaps.eosdis.nasa.gov/map/#t:tsd;d:today;l:fires_all,earth;@' +
-                             reference['latitude'].astype(str) + ',' + reference['longitude'].astype(str) +
+                             reference['longitude'].astype(str) + ',' + reference['latitude'].astype(str) +
                              ',16.000z" target="_blank">fire</a>')
         reference['focus'] = 'gauge'
 
