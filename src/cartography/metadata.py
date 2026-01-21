@@ -8,11 +8,13 @@ class Metadata:
         """
         About a gauge station and its vicinity.
 
+        <ul>
+            <li>FIRMS: Fire Information for Resource Management System</li>
+            <li>NASA: National Aeronautics and Space Administration</li>
+        </ul>
+
         :return:
         """
-
-        firms: str = 'Fire Information for Resource Management System'
-        nasa: str = 'National Aeronautics and Space Administration'
 
         return """
                 function(feature, layer) {
@@ -21,11 +23,8 @@ class Metadata:
                         'Gauge Datum: ' + feature.properties.gauge_datum.toFixed(4) + ' metres<br>' +
                         'River/Water: ' + feature.properties.river_name + '<br>' +
                         'Catchment: ' + feature.properties.catchment_name + '<br><br>' +
-                        'LIVE TRAINS: Inspect live ' + feature.properties.railway + '; by signalbox.io.<br>' +
-                        'FIRE TRACKING: A ' + feature.properties.fire + ' information source option; by ' + 
-                        '<abbr title="National Aeronautics and Space Administration, United States of America">NASA</abbr> ' +
-                        '<abbr title="Fire Information for Resource Management System">FIRMS</abbr> ' + 
-                        '[<a href="https://www.earthdata.nasa.gov/data/tools/firms/faq" target="_blank">README</a>].'
+                        'For more about the vicinity of the gauge station click on this icon; ' + 
+                        'the resulting popup has links to hubs that outline live trains, fires, etc., - <b>if applicable/any.</b>'
                     );
                     
                     layer.bindPopup(
@@ -33,8 +32,8 @@ class Metadata:
                         'Gauge Datum: ' + feature.properties.gauge_datum.toFixed(4) + ' metres<br>' +
                         'River/Water: ' + feature.properties.river_name + '<br>' +
                         'Catchment: ' + feature.properties.catchment_name + '<br><br>' +
-                        'LIVE TRAINS: Inspect live ' + feature.properties.railway + '; by signalbox.io.<br>' +
-                        'FIRE TRACKING: A ' + feature.properties.fire + ' information source option; by ' + 
+                        '<b>LIVE TRAINS:</b> Inspect live ' + feature.properties.railway + '; by signalbox.io.<br><br>' +
+                        '<b>FIRE TRACKING:</b> A ' + feature.properties.fire + ' information source option; by ' + 
                         '<abbr title="National Aeronautics and Space Administration, United States of America">NASA</abbr> ' +
                         '<abbr title="Fire Information for Resource Management System">FIRMS</abbr> ' + 
                         '[<a href="https://www.earthdata.nasa.gov/data/tools/firms/faq" target="_blank">README</a>].'
