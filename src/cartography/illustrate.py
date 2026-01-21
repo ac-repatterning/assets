@@ -120,7 +120,7 @@ class Illustrate:
                 folium.Marker(
                     location=[schools.iloc[i]['latitude'], schools.iloc[i]['longitude']],
                     tooltip= '<b>' + schools.iloc[i]['school_name'] + '</b><br>' + schools.iloc[i]['level'],
-                    icon=folium.Icon(prefix='fa', icon='school', icon_size=(0.5,0.5), color='white', icon_color='#504f10')
+                    icon=folium.Icon(prefix='fa', icon='school', icon_size=(0.4,0.4), color='white', icon_color='#504f10')
                 ).add_to(vector)
 
             # Care Homes
@@ -128,7 +128,7 @@ class Illustrate:
                 folium.Marker(
                     location=[leaves.iloc[i]['latitude'], leaves.iloc[i]['longitude']],
                     tooltip= '<b>' + leaves.iloc[i]['organisation'] + '</b><br>' + leaves.iloc[i]['town'],
-                    icon=folium.Icon(prefix='fa', icon='house-flag', icon_size=(0.5,0.5), color='white', icon_color='black')
+                    icon=folium.Icon(prefix='fa', icon='house-flag', icon_size=(0.4,0.4), color='white', icon_color='black')
                 ).add_to(vector)
 
             # Finally
