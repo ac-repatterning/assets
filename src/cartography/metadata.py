@@ -1,5 +1,10 @@
+"""Module metadata.py"""
+
 
 class Metadata:
+    """
+    The popup & tooltip text of the gauge stations.
+    """
 
     def __init__(self):
         pass
