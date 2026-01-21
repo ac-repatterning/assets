@@ -53,7 +53,7 @@ class Illustrate:
 
         return __focus
 
-    # pylint: disable=R0915
+    # pylint: disable=R0915,C0302
     def exc(self, _name: str):
         """
 
@@ -72,7 +72,6 @@ class Illustrate:
 
         # Base Layer
         waves = folium.Map(location=[self.__c_latitude, self.__c_longitude], tiles='OpenStreetMap', zoom_start=7)
-
         folium.GeoJson(
             data=self.__coarse.to_crs(epsg=3857),
             name='Boundaries',
