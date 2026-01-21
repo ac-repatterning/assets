@@ -23,8 +23,9 @@ class Metadata:
                         'Gauge Datum: ' + feature.properties.gauge_datum.toFixed(4) + ' metres<br>' +
                         'River/Water: ' + feature.properties.river_name + '<br>' +
                         'Catchment: ' + feature.properties.catchment_name + '<br><br>' +
-                        '<b>For more about the vicinity of the gauge station click on this icon</b>; <br>' + 
-                        'the resulting popup has links to hubs that outline live trains, fires, <br>' + 
+                        '<b>For more about the vicinity of the gauge station <br>' + 
+                        '<span style="color: #d54b00;">click on this gauge station&apos;s icon</span></b>; the resulting popup <br>' + 
+                        'has links to hubs that outline live trains, fires, <br>' + 
                         'etc., - <b>if applicable/any.</b>'
                     );
                     
