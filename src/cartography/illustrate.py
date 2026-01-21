@@ -11,6 +11,7 @@ import pandas as pd
 import config
 import src.cartography.centroids
 import src.cartography.custom
+import src.cartography.metadata
 import src.cartography.parcels
 import src.elements.parcel as pcl
 
@@ -31,8 +32,8 @@ class Illustrate:
         self.__points = points
         self.__coarse = coarse
 
-        # Configurations
-        self.__configurations = config.Config()
+        # Metadata: Gauge Station
+        self.__metadata = src.cartography.metadata.Metadata()
 
         # Centroid, Parcels
         self.__c_latitude, self.__c_longitude = src.cartography.centroids.Centroids(blob=self.__points).__call__()
@@ -59,6 +60,8 @@ class Illustrate:
         :param _name: The map file's name
         :return:
         """
+
+        __configurations = config.Config()
 
         # Colours
         colours: branca.colormap.StepColormap = branca.colormap.LinearColormap(
@@ -97,15 +100,7 @@ class Illustrate:
             schools: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='schools')
 
             # Gauges
-            on_each_feature = folium.utilities.JsCode("""
-                function(feature, layer) {
-                    layer.bindTooltip(
-                        '<b>' + feature.properties.station_name + '</b><br>' +
-                        'Gauge Datum: ' + feature.properties.gauge_datum.toFixed(4) + ' metres<br>' +
-                        'River/Water: ' + feature.properties.river_name + '<br>' +
-                        'Catchment: ' + feature.properties.catchment_name + '<br>' +
-                        feature.properties.railway
-                    );}""")
+            on_each_feature = folium.utilities.JsCode(self.__metadata())
 
             folium.GeoJson(
                 instances,
@@ -117,8 +112,7 @@ class Illustrate:
                     "radius": custom.f_radius(feature['properties']['gauge_datum'])
                 },
                 zoom_on_click=True,
-                on_each_feature=on_each_feature,
-                popup=folium.GeoJsonPopup(fields=['railway'], aliases=[''])
+                on_each_feature=on_each_feature # popup=folium.GeoJsonPopup(fields=['railway'], aliases=[''])
             ).add_to(vector)
 
             # Schools
@@ -146,5 +140,5 @@ class Illustrate:
         ).add_to(waves)
 
         # Persist
-        outfile = os.path.join(self.__configurations.maps_, f'{_name}.html')
+        outfile = os.path.join(__configurations.maps_, f'{_name}.html')
         waves.save(outfile=outfile)
