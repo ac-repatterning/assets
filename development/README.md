@@ -2,10 +2,13 @@
 
 ## Environments
 
-* [Advanced GeoJSON Customization with on_each_feature](https://python-visualization.github.io/folium/dev/user_guide/geojson/geojson_advanced_on_each_feature.html)
-* https://leafletjs.com/reference.html
-* https://leaflet.github.io/Leaflet.markercluster/
-  * https://github.com/Leaflet/Leaflet.markercluster#examples
+* [leaflet.js](https://leafletjs.com)
+  * [reference](https://leafletjs.com/reference.html)
+  * [marker cluster](https://leaflet.github.io/Leaflet.markercluster/); [examples](https://github.com/Leaflet/Leaflet.markercluster#examples)
+* [folium](https://python-visualization.github.io/folium/latest/)
+  * [hyperlinks](https://python-visualization.github.io/folium/latest/user_guide/geojson/geojson_marker.html)
+  * [on_each_feature](https://python-visualization.github.io/folium/dev/user_guide/geojson/geojson_advanced_on_each_feature.html), [more](https://python-visualization.github.io/folium/latest/advanced_guide/customize_javascript_and_css.html)
+  * [tooltip & popup](https://python-visualization.github.io/folium/latest/user_guide/geojson/geojson_popup_and_tooltip.html)
 * signalbox.io
   * [a specific train](https://www.map.signalbox.io/?train=202601197192559&location=@54.94505,-2.27710,10Z)
   * trains within the vicinity of an area: [1](https://www.map.signalbox.io/?location=@54.94504,-2.27709,9Z), [2](https://www.map.signalbox.io/?location=@54.66946,-1.33037,10Z)
