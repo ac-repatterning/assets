@@ -144,7 +144,7 @@ class Illustrate:
             groups={'catchment': computations}, exclusive_groups=False, collapsed=True
         ).add_to(waves)
 
-        folium.plugins.Draw(export=True).add_to(waves)
+        folium.plugins.Draw(export=False, position='bottomleft').add_to(waves)
 
         # Persist
         outfile = os.path.join(__configurations.maps_, f'{_name}.html')
