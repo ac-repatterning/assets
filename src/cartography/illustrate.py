@@ -1,4 +1,5 @@
 """Module cartography/illustrate.py"""
+import logging
 import os
 
 import branca.colormap
@@ -54,14 +55,16 @@ class Illustrate:
         return __focus
 
     # pylint: disable=R0915,C0302
-    def exc(self, _name: str):
+    def exc(self, _name: str, tiles: str):
         """
 
         :param _name: The map file's name
+        :param tiles:
         :return:
         """
 
         __configurations = config.Config()
+        logging.info('TILES: %s', len(tiles) > 0)
 
         # Colours
         colours: branca.colormap.StepColormap = branca.colormap.LinearColormap(
@@ -137,6 +140,8 @@ class Illustrate:
         folium.plugins.GroupedLayerControl(
             groups={'catchment': computations}, exclusive_groups=False, collapsed=True
         ).add_to(waves)
+
+        folium.plugins.Draw(export=True).add_to(waves)
 
         # Persist
         outfile = os.path.join(__configurations.maps_, f'{_name}.html')
