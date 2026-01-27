@@ -118,7 +118,7 @@ class Illustrate:
             ).add_to(vector)
 
             # Schools
-            clustering_schools = folium.plugins.MarkerCluster(overlay=True, control=False)
+            clustering_schools = folium.plugins.MarkerCluster(overlay=True, control=False, name='Schools')
             for i in range(schools.shape[0]):
                 marking_schools = folium.Marker(
                     location=[schools.iloc[i]['latitude'], schools.iloc[i]['longitude']],
@@ -128,13 +128,16 @@ class Illustrate:
                 clustering_schools.add_child(marking_schools)
             clustering_schools.add_to(vector)
 
-            # Care Homes
+            # Care
+            clustering_care = folium.plugins.MarkerCluster(overlay=True, control=False, name='Care')
             for i in range(leaves.shape[0]):
-                folium.Marker(
+                marking_care = folium.Marker(
                     location=[leaves.iloc[i]['latitude'], leaves.iloc[i]['longitude']],
                     tooltip= '<b>' + leaves.iloc[i]['organisation'] + '</b><br>' + leaves.iloc[i]['town'],
                     icon=folium.Icon(prefix='fa', icon='house-medical', icon_size=(0.4,0.4), color='white', icon_color='black')
-                ).add_to(vector)
+                )
+                clustering_care.add_child(marking_care)
+            clustering_care.add_to(vector)
 
             # Finally
             waves.add_child(vector)
