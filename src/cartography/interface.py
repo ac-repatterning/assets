@@ -33,6 +33,8 @@ class Interface:
 
         # Instances
         self.__maps = src.acquire.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
+
+        # A `map tiles` option
         secret = src.functions.secret.Secret(connector=self.__connector)
         self.__tiles = secret.exc(secret_id=config.Config().project_key_name, node='background')
 
