@@ -118,12 +118,15 @@ class Illustrate:
             ).add_to(vector)
 
             # Schools
+            clustering = folium.plugins.MarkerCluster(overlay=True, control=False)
             for i in range(schools.shape[0]):
-                folium.Marker(
+                marking = folium.Marker(
                     location=[schools.iloc[i]['latitude'], schools.iloc[i]['longitude']],
                     tooltip= '<b>' + schools.iloc[i]['school_name'] + '</b><br>' + schools.iloc[i]['level'],
                     icon=folium.Icon(prefix='fa', icon='school', icon_size=(0.4,0.4), color='white', icon_color='#504f10')
-                ).add_to(vector)
+                )
+                clustering.add_child(marking)
+            clustering.add_to(vector)
 
             # Care Homes
             for i in range(leaves.shape[0]):
