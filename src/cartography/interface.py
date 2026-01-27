@@ -5,11 +5,13 @@ import boto3
 import geopandas
 import pandas as pd
 
+import config
 import src.acquire.maps
 import src.acquire.reference
-import src.cartography.points
 import src.cartography.illustrate
+import src.cartography.points
 import src.elements.s3_parameters as s3p
+import src.functions.secret
 import src.s3.keys
 
 
@@ -31,6 +33,8 @@ class Interface:
 
         # Instances
         self.__maps = src.acquire.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
+        secret = src.functions.secret.Secret(connector=self.__connector)
+        self.__tiles = secret.exc(secret_id=config.Config().project_key_name, node='background')
 
     def exc(self, codes: pd.DataFrame):
         """
@@ -52,4 +56,4 @@ class Interface:
 
         # Draw
         src.cartography.illustrate.Illustrate(
-            points=points, coarse=coarse, codes=codes).exc(_name='assets')
+            points=points, coarse=coarse, codes=codes).exc(_name='assets', tiles=self.__tiles)
