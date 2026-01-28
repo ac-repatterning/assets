@@ -11,6 +11,7 @@
   * [tooltip & popup](https://python-visualization.github.io/folium/latest/user_guide/geojson/geojson_popup_and_tooltip.html)
   * [draw](https://python-visualization.github.io/folium/latest/user_guide/plugins/draw.html)
   * [TileProvider](https://xyzservices.readthedocs.io/en/latest/api.html#xyzservices.TileProvider)
+  * [cluster colours](https://github.com/python-visualization/folium/issues/1847)
 * signalbox.io
   * [a specific train](https://www.map.signalbox.io/?train=202601197192559&location=@54.94505,-2.27710,10Z)
   * trains within the vicinity of an area: [1](https://www.map.signalbox.io/?location=@54.94504,-2.27709,9Z), [2](https://www.map.signalbox.io/?location=@54.66946,-1.33037,10Z)
