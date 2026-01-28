@@ -146,7 +146,9 @@ class Illustrate:
 
         folium.plugins.Draw(
             export=False, position='bottomleft', show_geometry_on_click=False,
-            draw_options={'polyline': False}).add_to(waves)
+            draw_options={'polyline': False, 'polygon': False, 'rectangle': False, 'marker': False,
+                          'circle': {'shapeOptions': {'color': 'orange', 'opacity': 0.25}}}
+        ).add_to(waves)
 
         # Persist
         outfile = os.path.join(__configurations.maps_, f'{_name}.html')
