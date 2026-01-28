@@ -54,7 +54,7 @@ class Illustrate:
 
         return __focus
 
-    # pylint: disable=R0915,C0302
+    # pylint: disable=R0915,C0302,R0914
     def exc(self, _name: str, tiles: str):
         """
 
