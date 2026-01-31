@@ -35,11 +35,11 @@ class Interface:
         self.__maps = src.acquire.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
 
         # A `map tiles` option
-        secret = src.functions.secret.Secret(connector=self.__connector)
-        self.__tiles = secret.exc(secret_id=config.Config().project_key_name, node='background')
+        self.__secret = src.functions.secret.Secret(connector=self.__connector)
 
     def exc(self, codes: pd.DataFrame):
         """
+        © 2026 Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database right 2026
 
         :param codes: ['catchment_id', 'ts_id']
         :return:
@@ -57,5 +57,7 @@ class Interface:
         logging.info(points)
 
         # Draw
+        m_service = self.__secret.exc(secret_id=config.Config().project_key_name, node='europa-technologies')
+        tiles = 'https://tile.viaeuropa.uk.com/' +  m_service + '/m0306/{z}/{x}/{y}.png'
         src.cartography.illustrate.Illustrate(
-            points=points, coarse=coarse, codes=codes).exc(_name='assets', tiles=self.__tiles)
+            points=points, coarse=coarse, codes=codes).exc(_name='assets', tiles=tiles)
