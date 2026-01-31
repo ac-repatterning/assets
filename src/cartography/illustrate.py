@@ -55,11 +55,11 @@ class Illustrate:
         return __focus
 
     # pylint: disable=R0915,C0302,R0914
-    def exc(self, _name: str, tiles: str):
+    def exc(self, _name: str, mapping_service: dict):
         """
 
         :param _name: The map file's name
-        :param tiles:
+        :param mapping_service: For folium.Map()
         :return:
         """
 
@@ -73,7 +73,10 @@ class Illustrate:
         custom = src.cartography.custom.Custom()
 
         # Base Layer
-        waves = folium.Map(location=[self.__c_latitude, self.__c_longitude], tiles=tiles, attr='Europa Technologies', zoom_start=16)
+        waves = folium.Map(location=[self.__c_latitude, self.__c_longitude],
+                           tiles=mapping_service.get('tiles'),
+                           attr=mapping_service.get('attr'),
+                           zoom_start=8)
         folium.GeoJson(
             data=self.__coarse.to_crs(epsg=3857),
             name='Boundaries',
