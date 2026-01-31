@@ -64,7 +64,6 @@ class Illustrate:
         """
 
         __configurations = config.Config()
-        logging.info('TILES: %s', len(tiles) > 0)
 
         # Colours
         colours: branca.colormap.StepColormap = branca.colormap.LinearColormap(
@@ -74,7 +73,7 @@ class Illustrate:
         custom = src.cartography.custom.Custom()
 
         # Base Layer
-        waves = folium.Map(location=[self.__c_latitude, self.__c_longitude], tiles='OpenStreetMap', zoom_start=7)
+        waves = folium.Map(location=[self.__c_latitude, self.__c_longitude], tiles=tiles, attr='Europa Technologies', zoom_start=16)
         folium.GeoJson(
             data=self.__coarse.to_crs(epsg=3857),
             name='Boundaries',
