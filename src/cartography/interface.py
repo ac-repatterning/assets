@@ -39,7 +39,7 @@ class Interface:
 
     def exc(self, codes: pd.DataFrame):
         """
-        © 2026 Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database right 2026
+        © Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database
 
         :param codes: ['catchment_id', 'ts_id']
         :return:
@@ -57,7 +57,10 @@ class Interface:
         logging.info(points)
 
         # Draw
-        m_service = self.__secret.exc(secret_id=config.Config().project_key_name, node='europa-technologies')
-        tiles = 'https://tile.viaeuropa.uk.com/' +  m_service + '/m0306/{z}/{x}/{y}.png'
+        provider = self.__secret.exc(secret_id=config.Config().project_key_name, node='europa-technologies')
+        mapping_service = {
+            'tiles': 'https://tile.viaeuropa.uk.com/' +  provider + '/m0306/{z}/{x}/{y}.png',
+            'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database'
+        }
         src.cartography.illustrate.Illustrate(
-            points=points, coarse=coarse, codes=codes).exc(_name='assets', tiles=tiles)
+            points=points, coarse=coarse, codes=codes).exc(_name='assets', mapping_service=mapping_service)
