@@ -75,7 +75,7 @@ class Illustrate:
         waves = folium.Map(location=[self.__c_latitude, self.__c_longitude],
                            tiles=background.get('tiles'),
                            attr=background.get('attr'),
-                           zoom_start=8)
+                           zoom_start=9, min_zoom=8, max_zoom=17)
         folium.GeoJson(
             data=self.__coarse.to_crs(epsg=3857),
             name='Boundaries',
