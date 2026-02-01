@@ -81,12 +81,12 @@ class Illustrate:
             data=self.__coarse.to_crs(epsg=3857),
             name='Boundaries',
             style_function=lambda feature: {
-                "fillColor": "#ffffff", "color": "black", "opacity": 0.65, "weight": 0.85, "dashArray": "5, 2"
+                "fillColor": "#ffffff", "color": "black", "opacity": 0.85, "weight": 0.95, "dashArray": "5, 2"
             },
             tooltip=folium.GeoJsonTooltip(fields=["catchment_name"], aliases=["Catchment Name"]),
             control=False,
             highlight_function=lambda feature: {
-                "fillColor": "#6b8e23", "fillOpacity": 0.20
+                "fillColor": "#6b8e23", "fillOpacity": 0.10
             }
         ).add_to(waves)
 
