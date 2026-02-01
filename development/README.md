@@ -6,16 +6,22 @@
   * [reference](https://leafletjs.com/reference.html)
   * [marker cluster](https://leaflet.github.io/Leaflet.markercluster/); [examples](https://github.com/Leaflet/Leaflet.markercluster#examples)
 * [folium](https://python-visualization.github.io/folium/latest/)
-  * [hyperlinks](https://python-visualization.github.io/folium/latest/user_guide/geojson/geojson_marker.html)
-  * [on_each_feature](https://python-visualization.github.io/folium/dev/user_guide/geojson/geojson_advanced_on_each_feature.html), [more](https://python-visualization.github.io/folium/latest/advanced_guide/customize_javascript_and_css.html)
-  * [tooltip & popup](https://python-visualization.github.io/folium/latest/user_guide/geojson/geojson_popup_and_tooltip.html)
-  * [draw](https://python-visualization.github.io/folium/latest/user_guide/plugins/draw.html)
-  * [TileProvider](https://xyzservices.readthedocs.io/en/latest/api.html#xyzservices.TileProvider)
-  * [cluster colours](https://github.com/python-visualization/folium/issues/1847)
-  * [choropleth](https://vverde.github.io/blob/interactivechoropleth.html)
-  * [feature group](https://python-visualization.github.io/folium/latest/user_guide/plugins/featuregroup_subgroup.html)
-  * [fontawesome](https://fontawesome.com/search)
-  * [markers](https://darigak.medium.com/your-guide-to-folium-markers-b9324fc7d65d)
+  <details><summary></summary>
+    <ul>
+      <li><a href="https://python-visualization.github.io/folium/latest/user_guide/geojson/geojson_marker.html" target="_blank">hyperlinks</a></li>
+      <li><a href="https://python-visualization.github.io/folium/dev/user_guide/geojson/geojson_advanced_on_each_feature.html" target="_blank">on_each_feature</a>, <a href="https://python-visualization.github.io/folium/latest/advanced_guide/customize_javascript_and_css.html" target="_blank">more</a></li>
+      <li><a href="https://python-visualization.github.io/folium/latest/user_guide/geojson/geojson_popup_and_tooltip.html" target="_blank">tooltip & popup</a></li>
+      <li><a href="https://python-visualization.github.io/folium/latest/user_guide/plugins/draw.html" target="_blank">draw</a></li>
+      <li><a href="https://xyzservices.readthedocs.io/en/latest/api.html#xyzservices.TileProvider" target="_blank">TileProvider</a></li>
+      <li><a href="https://github.com/python-visualization/folium/issues/1847" target="_blank">cluster colours</a></li>
+      <li><a href="https://vverde.github.io/blob/interactivechoropleth.html" target="_blank">choropleth</a></li>
+      <li><a href="https://python-visualization.github.io/folium/latest/user_guide/plugins/featuregroup_subgroup.html" target="_blank">feature group</a></li>
+      <li><a href="https://fontawesome.com/search" target="_blank">fontawesome</a></li>
+      <li><a href="https://darigak.medium.com/your-guide-to-folium-markers-b9324fc7d65d" target="_blank">markers</a></li>
+    </ul>
+    
+  </details>
+  
 * signalbox.io
   * [a specific train](https://www.map.signalbox.io/?train=202601197192559&location=@54.94505,-2.27710,10Z)
   * trains within the vicinity of an area: [1](https://www.map.signalbox.io/?location=@54.94504,-2.27709,9Z), [2](https://www.map.signalbox.io/?location=@54.66946,-1.33037,10Z)
