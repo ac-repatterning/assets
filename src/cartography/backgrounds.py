@@ -35,16 +35,16 @@ class Backgrounds:
         dictionary = [
             {'tiles': 'https://tile.viaeuropa.uk.com/' +  e_technologies + '/m0306/{z}/{x}/{y}.png',
              'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
-             'filename': 'vml-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17},
+             'filename': 'vml-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17, 'crs': 'EPSG3857'},
             {'tiles': 'https://tile.viaeuropa.uk.com/' +  e_technologies + '/m0310/{z}/{x}/{y}.png',
              'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
-             'filename': 'mm-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17},
+             'filename': 'mm-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17, 'crs': 'EPSG3857'},
             {'tiles': 'OpenStreetMap',
              'attr': None,
-             'filename': 'open-street-map', 'zoom_start': 7,  'min_zoom': 0, 'max_zoom': 19},
+             'filename': 'open-street-map', 'zoom_start': 7,  'min_zoom': 0, 'max_zoom': 19, 'crs': 'EPSG3857'},
             {'tiles': 'OpenStreetMap',
              'attr': None,
-             'filename': 'assets', 'zoom_start': 7, 'min_zoom': 0, 'max_zoom': 19}
+             'filename': 'assets', 'zoom_start': 7, 'min_zoom': 0, 'max_zoom': 19, 'crs': 'EPSG3857'}
         ]
 
         return dictionary
