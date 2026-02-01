@@ -149,7 +149,7 @@ class Illustrate:
         folium.plugins.Draw(
             export=False, position='bottomleft', show_geometry_on_click=False,
             draw_options={'polyline': False, 'polygon': False, 'rectangle': False, 'marker': False,
-                          'circle': {'shapeOptions': {'color': 'orange', 'opacity': 0.25}}}
+                          'circle': {'shapeOptions': {'color': '#bdb76b', 'stroke': True, 'dashArray': '', 'opacity': 0.35}}}
         ).add_to(waves)
 
         # Persist
