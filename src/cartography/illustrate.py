@@ -1,5 +1,6 @@
 """Module cartography/illustrate.py"""
 import logging
+import collections
 import os
 
 import branca.colormap
@@ -43,7 +44,7 @@ class Illustrate:
     def __get_focus(self, catchment_id: int, focus: str):
         """
 
-        :param catchment_id:
+        :param catchment_id: A catchment identification code
         :param focus: e.g., care homes `elders`, schools `schools`, gauge stations `gauge`
         :return:
         """
@@ -55,10 +56,10 @@ class Illustrate:
         return __focus
 
     # pylint: disable=R0915,C0302,R0914
-    def exc(self, background: dict):
+    def exc(self, background: collections.namedtuple) -> str:
         """
 
-        :param background: ...
+        :param background: A namedtuple about a background map
         :return:
         """
 
@@ -73,9 +74,9 @@ class Illustrate:
 
         # Base Layer
         waves = folium.Map(location=[self.__c_latitude, self.__c_longitude],
-                           tiles=background.get('tiles'),
-                           attr=background.get('attr'),
-                           zoom_start=9, min_zoom=8, max_zoom=17)
+                           tiles=background.tiles,
+                           attr=background.attr,
+                           zoom_start=9, min_zoom=background.min_zoom, max_zoom=background.max_zoom)
         folium.GeoJson(
             data=self.__coarse.to_crs(epsg=3857),
             name='Boundaries',
@@ -155,5 +156,7 @@ class Illustrate:
         ).add_to(waves)
 
         # Persist
-        outfile = os.path.join(__configurations.maps_, f'{background.get('name')}.html')
+        outfile = os.path.join(__configurations.maps_, f'{background.filename}.html')
         waves.save(outfile=outfile)
+
+        return f'{background.filename}.html'
