@@ -125,7 +125,7 @@ class Illustrate:
                 marking_schools = folium.Marker(
                     location=[schools.iloc[i]['latitude'], schools.iloc[i]['longitude']],
                     tooltip= '<b>' + schools.iloc[i]['school_name'] + '</b><br>' + schools.iloc[i]['level'],
-                    icon=folium.Icon(prefix='fa', icon='school', icon_size=(0.4,0.4), color='white', icon_color='#504f10')
+                    icon=folium.Icon(prefix='fa', icon='book', icon_size=(0.5,0.5), color='white', icon_color='#504f10')
                 )
                 clustering_schools.add_child(marking_schools)
             clustering_schools.add_to(vector)
@@ -135,7 +135,7 @@ class Illustrate:
                 folium.Marker(
                     location=[leaves.iloc[i]['latitude'], leaves.iloc[i]['longitude']],
                     tooltip= '<b>' + leaves.iloc[i]['organisation'] + '</b><br>' + leaves.iloc[i]['town'],
-                    icon=folium.Icon(prefix='fa', icon='house-medical', icon_size=(0.4,0.4), color='white', icon_color='black')
+                    icon=folium.Icon(prefix='fa', icon='house-medical', icon_size=(0.5,0.5), color='white', icon_color='black')
                 ).add_to(vector)
 
             # Finally
@@ -149,7 +149,7 @@ class Illustrate:
         folium.plugins.Draw(
             export=False, position='bottomleft', show_geometry_on_click=False,
             draw_options={'polyline': False, 'polygon': False, 'rectangle': False, 'marker': False,
-                          'circle': {'shapeOptions': {'color': '#000000', 'stroke': True, 'dashArray': '', 'opacity': 0.10}},
+                          'circle': {'shapeOptions': {'color': '#6495ed', 'stroke': True, 'dashArray': '', 'opacity': 0.10}},
                           'circlemarker': {'color': '#000000', 'opacity': 0.85, 'fillOpacity': 0.35}}
         ).add_to(waves)
 
