@@ -74,8 +74,7 @@ class Illustrate:
 
         # Base Layer
         waves = folium.Map(location=[self.__c_latitude, self.__c_longitude],
-                           tiles=background.tiles,
-                           attr=background.attr,
+                           tiles=background.tiles, attr=background.attr,
                            zoom_start=background.zoom_start, min_zoom=background.min_zoom, max_zoom=background.max_zoom)
         folium.GeoJson(
             data=self.__coarse.to_crs(epsg=3857),
