@@ -58,9 +58,10 @@ class Interface:
 
         # Draw
         provider = self.__secret.exc(secret_id=config.Config().project_key_name, node='europa-technologies')
-        mapping_service = {
+        background = {
             'tiles': 'https://tile.viaeuropa.uk.com/' +  provider + '/m0306/{z}/{x}/{y}.png',
-            'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database'
+            'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
+            'name': 'assets'
         }
         src.cartography.illustrate.Illustrate(
-            points=points, coarse=coarse, codes=codes).exc(_name='assets', mapping_service=mapping_service)
+            points=points, coarse=coarse, codes=codes).exc(background=background)
