@@ -142,14 +142,6 @@ class Illustrate:
             waves.add_child(vector)
             computations.append(vector)
 
-        spider = folium.plugins.OverlappingMarkerSpiderfier(
-            keep_spiderfied=True,  # Retain web after clicking
-            nearby_distance=25,  # Clustering distance
-            leg_weight=1,  # The line thickness of the webs
-            circle_spiral_switchover=5  # The circle / spiral switch threshold
-        )
-        waves.add_child(spider)
-
         folium.plugins.GroupedLayerControl(
             groups={'catchment': computations}, exclusive_groups=False, collapsed=True
         ).add_to(waves)
