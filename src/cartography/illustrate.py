@@ -55,11 +55,10 @@ class Illustrate:
         return __focus
 
     # pylint: disable=R0915,C0302,R0914
-    def exc(self, _name: str, mapping_service: dict):
+    def exc(self, background: dict):
         """
 
-        :param _name: The map file's name
-        :param mapping_service: For folium.Map()
+        :param background: ...
         :return:
         """
 
@@ -74,8 +73,8 @@ class Illustrate:
 
         # Base Layer
         waves = folium.Map(location=[self.__c_latitude, self.__c_longitude],
-                           tiles=mapping_service.get('tiles'),
-                           attr=mapping_service.get('attr'),
+                           tiles=background.get('tiles'),
+                           attr=background.get('attr'),
                            zoom_start=8)
         folium.GeoJson(
             data=self.__coarse.to_crs(epsg=3857),
@@ -154,5 +153,5 @@ class Illustrate:
         ).add_to(waves)
 
         # Persist
-        outfile = os.path.join(__configurations.maps_, f'{_name}.html')
+        outfile = os.path.join(__configurations.maps_, f'{background.get('name')}.html')
         waves.save(outfile=outfile)
