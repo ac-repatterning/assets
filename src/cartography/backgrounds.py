@@ -35,10 +35,13 @@ class Backgrounds:
         dictionary = [
             {'tiles': 'https://tile.viaeuropa.uk.com/' +  e_technologies + '/m0306/{z}/{x}/{y}.png',
              'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
-             'filename': 'vml-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17, 'crs': 'EPSG3857'},
+             'filename': 'vml-spm-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17, 'crs': 'EPSG3857'},
             {'tiles': 'https://tile.viaeuropa.uk.com/' +  e_technologies + '/m0310/{z}/{x}/{y}.png',
              'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
-             'filename': 'mm-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17, 'crs': 'EPSG3857'},
+             'filename': 'mm-spm-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17, 'crs': 'EPSG3857'},
+            {'tiles': 'https://tile.viaeuropa.uk.com/' +  e_technologies + '/m0106/{z}/{x}/{y}.png',
+             'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
+             'filename': 'vml-bng-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17, 'crs': 'EPSG27700'},
             {'tiles': 'OpenStreetMap',
              'attr': None,
              'filename': 'open-street-map', 'zoom_start': 7,  'min_zoom': 0, 'max_zoom': 19, 'crs': 'EPSG3857'},
@@ -58,7 +61,8 @@ class Backgrounds:
         dictionary = self.__get_dictionary()
 
         Background = collections.namedtuple(
-            typename = 'Background', field_names=['tiles', 'attr', 'filename', 'zoom_start', 'min_zoom', 'max_zoom'], defaults={'attr': None})
+            typename = 'Background',
+            field_names=['tiles', 'attr', 'filename', 'zoom_start', 'min_zoom', 'max_zoom', 'crs'], defaults={'attr': None})
         __backgrounds: list[Background] = [Background(**elements) for elements in dictionary]
 
         for background in __backgrounds:
