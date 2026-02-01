@@ -35,16 +35,16 @@ class Backgrounds:
         dictionary = [
             {'tiles': 'https://tile.viaeuropa.uk.com/' +  e_technologies + '/m0306/{z}/{x}/{y}.png',
              'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
-             'filename': 'vml-ordnance-survey'},
+             'filename': 'vml-ordnance-survey', 'min_zoom': 8, 'max_zoom': 17},
             {'tiles': 'https://tile.viaeuropa.uk.com/' +  e_technologies + '/m0310/{z}/{x}/{y}.png',
              'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
-             'filename': 'mm-ordnance-survey'},
+             'filename': 'mm-ordnance-survey', 'min_zoom': 8, 'max_zoom': 17},
             {'tiles': 'OpenStreetMap',
              'attr': None,
-             'filename': 'open-street-map'},
+             'filename': 'open-street-map', 'min_zoom': 0, 'max_zoom': 19},
             {'tiles': 'OpenStreetMap',
              'attr': None,
-             'filename': 'assets'}
+             'filename': 'assets', 'min_zoom': 0, 'max_zoom': 19}
         ]
 
         return dictionary
@@ -58,7 +58,7 @@ class Backgrounds:
         dictionary = self.__get_dictionary()
 
         Background = collections.namedtuple(
-            typename = 'Background', field_names=['tiles', 'attr', 'filename'], defaults={'attr': None})
+            typename = 'Background', field_names=['tiles', 'attr', 'filename', 'min_zoom', 'max_zoom'], defaults={'attr': None})
         __backgrounds: list[Background] = [Background(**elements) for elements in dictionary]
 
         for background in __backgrounds:
