@@ -39,7 +39,7 @@ class Backgrounds:
             {'tiles': 'https://tile.viaeuropa.uk.com/' +  e_technologies + '/m0310/{z}/{x}/{y}.png',
              'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
              'filename': 'mm-spm-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17, 'crs': 'EPSG3857'},
-            {'tiles': 'https://tile.viaeuropa.uk.com/' +  e_technologies + '/m0106/{z}/{x}/{y}.png',
+            {'tiles': 'https://tile.viaeuropa.uk.com/' +  e_technologies + '/m0206/{z}/{x}/{y}.png',
              'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
              'filename': 'vml-bng-ordnance-survey', 'zoom_start': 9, 'min_zoom': 8, 'max_zoom': 17, 'crs': 'EPSG27700'},
             {'tiles': 'OpenStreetMap',
