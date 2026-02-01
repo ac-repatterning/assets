@@ -68,7 +68,7 @@ class Illustrate:
         colours: branca.colormap.StepColormap = branca.colormap.LinearColormap(
             ['black', 'brown', 'orange']).to_step(len(self.__parcels))
 
-        # Custom drawing functions
+        # Custom functions vis-à-vis graphing attributes
         custom = src.cartography.custom.Custom()
 
         # Base Layer
@@ -141,10 +141,12 @@ class Illustrate:
             waves.add_child(vector)
             computations.append(vector)
 
+        # Control Panel
         folium.plugins.GroupedLayerControl(
             groups={'catchment': computations}, exclusive_groups=False, collapsed=True
         ).add_to(waves)
 
+        # Drawing Tool
         folium.plugins.Draw(
             export=False, position='bottomleft', show_geometry_on_click=False,
             draw_options={'polyline': False, 'polygon': False, 'rectangle': False, 'marker': False,
