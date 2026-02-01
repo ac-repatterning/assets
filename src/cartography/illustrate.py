@@ -51,7 +51,7 @@ class Illustrate:
 
         __focus: geopandas.GeoDataFrame = self.__points.copy().loc[
                 (self.__points['catchment_id'] == catchment_id) & (self.__points['focus'] == focus), :]
-        __focus.to_crs(epsg=3857, inplace=True)
+        __focus.to_crs(epsg=4326, inplace=True)
 
         return __focus
 
@@ -78,7 +78,7 @@ class Illustrate:
                            zoom_start=background.zoom_start, min_zoom=background.min_zoom, max_zoom=background.max_zoom,
                            crs=background.crs)
         folium.GeoJson(
-            data=self.__coarse.to_crs(epsg=3857),
+            data=self.__coarse.to_crs(epsg=4326),
             name='Boundaries',
             style_function=lambda feature: {
                 "fillColor": "#ffffff", "color": "black", "opacity": 0.85, "weight": 0.95, "dashArray": "5, 2"
