@@ -5,9 +5,10 @@ import boto3
 import geopandas
 import pandas as pd
 
-import config
+import dask
 import src.acquire.maps
 import src.acquire.reference
+import src.cartography.backgrounds
 import src.cartography.illustrate
 import src.cartography.points
 import src.elements.s3_parameters as s3p
@@ -33,6 +34,7 @@ class Interface:
 
         # Instances
         self.__maps = src.acquire.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
+        self.__backgrounds = src.cartography.backgrounds.Backgrounds(connector=connector)()
 
         # Secrets
         self.__secret = src.functions.secret.Secret(connector=self.__connector)
@@ -54,14 +56,14 @@ class Interface:
         # Thus far, points vis-à-vis care homes and gauge stations.
         points: geopandas.GeoDataFrame = src.cartography.points.Points(
             care=care, schools=schools, reference=reference).exc()
-        logging.info(points)
 
         # Draw
-        provider = self.__secret.exc(secret_id=config.Config().project_key_name, node='europa-technologies')
-        background = {
-            'tiles': 'https://tile.viaeuropa.uk.com/' +  provider + '/m0306/{z}/{x}/{y}.png',
-            'attr': '© Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database',
-            'name': 'assets'
-        }
-        src.cartography.illustrate.Illustrate(
-            points=points, coarse=coarse, codes=codes).exc(background=background)
+        __illustrate = dask.delayed(src.cartography.illustrate.Illustrate(
+            points=points, coarse=coarse, codes=codes).exc)
+
+        computations = []
+        for background in self.__backgrounds:
+            message = __illustrate(background=background)
+            computations.append(message)
+        messages = dask.compute(computations, scheduler='processes')
+        logging.info(messages)
