@@ -1,7 +1,5 @@
 <br>
 
-## Environments
-
 * <details><summary><a href="https://leafletjs.com" target="_blank">leaflet.js</a></summary>
   <ul>
   <li><a href="https://leafletjs.com/reference.html" target="_blank">reference</a></li>
@@ -40,6 +38,8 @@
   </details>
 
 <br>
+
+## Environments
 
 ### Remote Development
 
