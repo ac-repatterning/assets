@@ -5,8 +5,7 @@
 * [leaflet.js](https://leafletjs.com)
   * [reference](https://leafletjs.com/reference.html)
   * [marker cluster](https://leaflet.github.io/Leaflet.markercluster/); [examples](https://github.com/Leaflet/Leaflet.markercluster#examples)
-* [folium](https://python-visualization.github.io/folium/latest/)
-  <details><summary></summary>
+* <details><summary><a href="https://python-visualization.github.io/folium/latest/" target="_blank">folium</a></summary>
     <ul>
       <li><a href="https://python-visualization.github.io/folium/latest/user_guide/geojson/geojson_marker.html" target="_blank">hyperlinks</a></li>
       <li><a href="https://python-visualization.github.io/folium/dev/user_guide/geojson/geojson_advanced_on_each_feature.html" target="_blank">on_each_feature</a>, <a href="https://python-visualization.github.io/folium/latest/advanced_guide/customize_javascript_and_css.html" target="_blank">more</a></li>
