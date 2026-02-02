@@ -2,9 +2,13 @@
 
 ## Environments
 
-* [leaflet.js](https://leafletjs.com)
-  * [reference](https://leafletjs.com/reference.html)
-  * [marker cluster](https://leaflet.github.io/Leaflet.markercluster/); [examples](https://github.com/Leaflet/Leaflet.markercluster#examples)
+* <details><summary><a href="https://leafletjs.com" target="_blank">leaflet.js</a></summary>
+  <ul>
+  <li><a href="https://leafletjs.com/reference.html" target="_blank">reference</a></li>
+  <li><a href="https://leaflet.github.io/Leaflet.markercluster/" target="_blank">marker cluster</a>; <a href="https://github.com/Leaflet/Leaflet.markercluster#examples" target="_blank">examples</a></li>
+  </ul>
+  </details>
+
 * <details><summary><a href="https://python-visualization.github.io/folium/latest/" target="_blank">folium</a></summary>
     <ul>
       <li><a href="https://python-visualization.github.io/folium/latest/user_guide/geojson/geojson_marker.html" target="_blank">hyperlinks</a></li>
@@ -18,18 +22,22 @@
       <li><a href="https://fontawesome.com/search" target="_blank">fontawesome</a></li>
       <li><a href="https://darigak.medium.com/your-guide-to-folium-markers-b9324fc7d65d" target="_blank">markers</a></li>
     </ul>
-    
   </details>
-  
-* signalbox.io
-  * [a specific train](https://www.map.signalbox.io/?train=202601197192559&location=@54.94505,-2.27710,10Z)
-  * trains within the vicinity of an area: [1](https://www.map.signalbox.io/?location=@54.94504,-2.27709,9Z), [2](https://www.map.signalbox.io/?location=@54.66946,-1.33037,10Z)
 
-* Europa Technologies
-  * [XYZ Tiles](https://docs.publicsectormapping.gov.scot/viaeuropa/maps/xyz-tiles)
-  * [map inventory](https://docs.publicsectormapping.gov.scot/viaeuropa/reference/map-inventory)
-  * [map projections](https://docs.publicsectormapping.gov.scot/viaeuropa/reference/projections)
+* <details><summary><a href="https://signalbox.io">signalbox.io</a></summary>
+    <ul>
+      <li><a href="https://www.map.signalbox.io/?train=202601197192559&location=@54.94505,-2.27710,10Z" target="_blank">a specific train</a></li>
+      <li>trains within the vicinity of an area: <a href="https://www.map.signalbox.io/?location=@54.94504,-2.27709,9Z" target="_blank">1</a>, <a href="https://www.map.signalbox.io/?location=@54.66946,-1.33037,10Z" target="_blank">2</a></li>
+    </ul>
+  </details>
 
+* <details><summary>Europa Technologies</summary>
+    <ul>
+      <li><a href="https://docs.publicsectormapping.gov.scot/viaeuropa/maps/xyz-tiles" target="_blank">XYZ Tiles</a></li>
+      <li><a href="https://docs.publicsectormapping.gov.scot/viaeuropa/reference/map-inventory" target="_blank">map inventory</a></li>
+      <li><a href="https://docs.publicsectormapping.gov.scot/viaeuropa/reference/projections" target="_blank">map projections</a></li>
+    </ul>
+  </details>
 
 <br>
 
