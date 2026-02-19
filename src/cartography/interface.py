@@ -34,24 +34,36 @@ class Interface:
         # Instances
         self.__maps = src.sources.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
         self.__backgrounds = src.cartography.backgrounds.Backgrounds(connector=connector)()
+        self.__reference = src.sources.reference.Reference(s3_parameters=self.__s3_parameters).exc()
 
-    def exc(self, codes: pd.DataFrame):
+    def __codes(self) -> pd.DataFrame:
+        """
+
+        :return:
+            codes: ['catchment_id', 'ts_id']
+        """
+
+        codes = self.__reference[['catchment_id', 'ts_id']].drop_duplicates()
+
+        return codes
+
+    def exc(self):
         """
         © Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database
 
-        :param codes: ['catchment_id', 'ts_id']
         :return:
         """
+
+        codes = self.__codes()
 
         # Maps
         coarse = self.__maps.exc(key_name='cartography/coarse.geojson')
         care = self.__maps.exc(key_name='cartography/care_and_coarse_catchments.geojson')
         schools = self.__maps.exc(key_name='cartography/sch-catchments.geojson')
-        reference = src.sources.reference.Reference(s3_parameters=self.__s3_parameters).exc()
 
         # Thus far, points vis-à-vis care homes and gauge stations.
         points: geopandas.GeoDataFrame = src.cartography.points.Points(
-            care=care, schools=schools, reference=reference).exc()
+            care=care, schools=schools, reference=self.__reference).exc()
 
         # Draw
         __illustrate = dask.delayed(src.cartography.illustrate.Illustrate(
