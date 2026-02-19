@@ -118,6 +118,8 @@ class Illustrate:
                 on_each_feature=on_each_feature # popup=folium.GeoJsonPopup(fields=['railway'], aliases=[''])
             ).add_to(vector)
 
+
+            '''
             # Schools
             clustering_schools = folium.plugins.MarkerCluster(overlay=True, control=False, name='Schools')
             for i in range(schools.shape[0]):
@@ -128,6 +130,7 @@ class Illustrate:
                 )
                 clustering_schools.add_child(marking_schools)
             clustering_schools.add_to(vector)
+            '''
 
             # Care
             for i in range(leaves.shape[0]):
