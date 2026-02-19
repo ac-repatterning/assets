@@ -6,8 +6,8 @@ import dask
 import geopandas
 import pandas as pd
 
-import src.acquire.maps
-import src.acquire.reference
+import src.sources.maps
+import src.sources.reference
 import src.cartography.backgrounds
 import src.cartography.illustrate
 import src.cartography.points
@@ -32,7 +32,7 @@ class Interface:
         self.__s3_parameters = s3_parameters
 
         # Instances
-        self.__maps = src.acquire.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
+        self.__maps = src.sources.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
         self.__backgrounds = src.cartography.backgrounds.Backgrounds(connector=connector)()
 
     def exc(self, codes: pd.DataFrame):
@@ -47,7 +47,7 @@ class Interface:
         coarse = self.__maps.exc(key_name='cartography/coarse.geojson')
         care = self.__maps.exc(key_name='cartography/care_and_coarse_catchments.geojson')
         schools = self.__maps.exc(key_name='cartography/sch-catchments.geojson')
-        reference = src.acquire.reference.Reference(s3_parameters=self.__s3_parameters).exc()
+        reference = src.sources.reference.Reference(s3_parameters=self.__s3_parameters).exc()
 
         # Thus far, points vis-à-vis care homes and gauge stations.
         points: geopandas.GeoDataFrame = src.cartography.points.Points(
