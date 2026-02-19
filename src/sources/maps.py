@@ -1,4 +1,5 @@
 """Module maps.py"""
+import logging
 import io
 
 import boto3
@@ -47,4 +48,10 @@ class Maps:
         :return:
         """
 
-        return self.__get_spatial_data(key_name=key_name)
+        diagram = self.__get_spatial_data(key_name=key_name)
+        logging.info('%s\n%s', key_name, diagram.crs)
+
+        diagram = diagram.to_crs(crs='EPSG:4326')
+        logging.info('%s\n%s', key_name, diagram.crs)
+
+        return diagram
