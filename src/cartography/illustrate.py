@@ -1,4 +1,5 @@
 """Module cartography/illustrate.py"""
+import collections
 import os
 
 import branca.colormap
@@ -41,23 +42,33 @@ class Illustrate:
 
     def __get_focus(self, catchment_id: int, focus: str):
         """
+        __focus.to_crs(epsg=4326, inplace=True)
 
-        :param catchment_id:
+        :param catchment_id: A catchment identification code
         :param focus: e.g., care homes `elders`, schools `schools`, gauge stations `gauge`
         :return:
         """
 
         __focus: geopandas.GeoDataFrame = self.__points.copy().loc[
                 (self.__points['catchment_id'] == catchment_id) & (self.__points['focus'] == focus), :]
-        __focus.to_crs(epsg=3857, inplace=True)
 
         return __focus
 
-    # pylint: disable=R0915,C0302
-    def exc(self, _name: str):
+    # pylint: disable=R0915,C0302,R0914
+    def exc(self, background: collections.namedtuple) -> str:
         """
 
-        :param _name: The map file's name
+        clustering_schools = folium.plugins.MarkerCluster(overlay=True, control=False, name='Schools')
+        for i in range(schools.shape[0]):
+            marking_schools = folium.Marker(
+                location=[schools.iloc[i]['latitude'], schools.iloc[i]['longitude']],
+                tooltip= '<b>' + schools.iloc[i]['school_name'] + '</b><br>' + schools.iloc[i]['level'],
+                icon=folium.Icon(prefix='fa', icon='book', icon_size=(0.5,0.5), color='white', icon_color='#504f10')
+            )
+            clustering_schools.add_child(marking_schools)
+        clustering_schools.add_to(vector)
+
+        :param background: A namedtuple about a background map
         :return:
         """
 
@@ -67,16 +78,20 @@ class Illustrate:
         colours: branca.colormap.StepColormap = branca.colormap.LinearColormap(
             ['black', 'brown', 'orange']).to_step(len(self.__parcels))
 
-        # Custom drawing functions
+        # Custom functions vis-à-vis graphing attributes
         custom = src.cartography.custom.Custom()
 
         # Base Layer
-        waves = folium.Map(location=[self.__c_latitude, self.__c_longitude], tiles='OpenStreetMap', zoom_start=7)
+        waves = folium.Map(location=[self.__c_latitude, self.__c_longitude],
+                           tiles=background.tiles, attr=background.attr,
+                           zoom_start=background.zoom_start, min_zoom=background.min_zoom, max_zoom=background.max_zoom,
+                           crs=background.crs, max_bounds=True)
         folium.GeoJson(
-            data=self.__coarse.to_crs(epsg=3857),
+            data=self.__coarse,
             name='Boundaries',
             style_function=lambda feature: {
-                "fillColor": "#ffffff", "color": "black", "opacity": 0.35, "weight": 0.85, "dashArray": "5, 2"
+                "fillColor": "#6b8e23", "fillOpacity": 0.20, "color": "black", "opacity": 0.85,
+                "weight": 0.95, "dashArray": "5, 2"
             },
             tooltip=folium.GeoJsonTooltip(fields=["catchment_name"], aliases=["Catchment Name"]),
             control=False,
@@ -94,9 +109,9 @@ class Illustrate:
             vector = folium.FeatureGroup(name=parcel.catchment_name, show=show)
 
             # gauges, care homes, schools
+            # schools: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='schools')
             instances: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='gauge')
             leaves: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='elders')
-            schools: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='schools')
 
             # Gauges
             on_each_feature = folium.utilities.JsCode(self.__metadata())
@@ -114,30 +129,33 @@ class Illustrate:
                 on_each_feature=on_each_feature # popup=folium.GeoJsonPopup(fields=['railway'], aliases=[''])
             ).add_to(vector)
 
-            # Schools
-            for i in range(schools.shape[0]):
-                folium.Marker(
-                    location=[schools.iloc[i]['latitude'], schools.iloc[i]['longitude']],
-                    tooltip= '<b>' + schools.iloc[i]['school_name'] + '</b><br>' + schools.iloc[i]['level'],
-                    icon=folium.Icon(prefix='fa', icon='school', icon_size=(0.4,0.4), color='white', icon_color='#504f10')
-                ).add_to(vector)
-
-            # Care Homes
+            # Care
             for i in range(leaves.shape[0]):
                 folium.Marker(
                     location=[leaves.iloc[i]['latitude'], leaves.iloc[i]['longitude']],
                     tooltip= '<b>' + leaves.iloc[i]['organisation'] + '</b><br>' + leaves.iloc[i]['town'],
-                    icon=folium.Icon(prefix='fa', icon='house-medical', icon_size=(0.4,0.4), color='white', icon_color='black')
+                    icon=folium.Icon(prefix='fa', icon='house-medical', icon_size=(0.5,0.5), color='white', icon_color='black')
                 ).add_to(vector)
 
             # Finally
             waves.add_child(vector)
             computations.append(vector)
 
+        # Control Panel
         folium.plugins.GroupedLayerControl(
             groups={'catchment': computations}, exclusive_groups=False, collapsed=True
         ).add_to(waves)
 
+        # Drawing Tool
+        folium.plugins.Draw(
+            export=False, position='bottomleft', show_geometry_on_click=False,
+            draw_options={'polyline': False, 'polygon': False, 'rectangle': False, 'marker': False,
+                          'circle': {'shapeOptions': {'color': '#6495ed', 'stroke': True, 'dashArray': '', 'opacity': 0.35}},
+                          'circlemarker': {'color': '#000000', 'opacity': 0.85, 'fillOpacity': 0.35}}
+        ).add_to(waves)
+
         # Persist
-        outfile = os.path.join(__configurations.maps_, f'{_name}.html')
+        outfile = os.path.join(__configurations.maps_, f'{background.filename}.html')
         waves.save(outfile=outfile)
+
+        return f'{background.filename}.html'

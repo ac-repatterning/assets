@@ -18,15 +18,13 @@ def main():
     logger: logging.Logger = logging.getLogger(__name__)
     logger.info('Starting: %s', datetime.datetime.now().isoformat(timespec='microseconds'))
 
-    codes = src.acquire.interface.Interface(
-        service=service, s3_parameters=s3_parameters, arguments=arguments).exc()
-
+    # drawing
     src.cartography.interface.Interface(
-        s3_parameters=s3_parameters, connector=connector).exc(codes=codes)
+        s3_parameters=s3_parameters, connector=connector).exc()
 
     # Transfer
     src.transfer.interface.Interface(
-      connector=connector, service=service, s3_parameters=s3_parameters, arguments=arguments).exc()
+        connector=connector, service=service, s3_parameters=s3_parameters, arguments=arguments).exc()
 
     # Delete Cache Points
     src.functions.cache.Cache().exc()
@@ -45,7 +43,6 @@ if __name__ == '__main__':
                         datefmt='%Y-%m-%d %H:%M:%S')
 
     # Modules
-    import src.acquire.interface
     import src.cartography.interface
     import src.elements.service as sr
     import src.elements.s3_parameters as s3p

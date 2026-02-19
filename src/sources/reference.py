@@ -50,7 +50,9 @@ class Reference:
         reference = self.__get_reference()
         reference.rename(columns=self.__rename, inplace=True)
 
-        c_4326 = geopandas.GeoDataFrame(reference, geometry=geopandas.points_from_xy(reference.longitude, reference.latitude))
+        c_4326 = geopandas.GeoDataFrame(
+            reference,
+            geometry=geopandas.points_from_xy(reference.longitude, reference.latitude))
         c_4326.crs = 'epsg:4326'
 
         return c_4326

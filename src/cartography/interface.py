@@ -2,15 +2,17 @@
 import logging
 
 import boto3
+import dask
 import geopandas
 import pandas as pd
 
-import src.acquire.maps
-import src.acquire.reference
-import src.cartography.points
+import src.cartography.backgrounds
 import src.cartography.illustrate
+import src.cartography.points
 import src.elements.s3_parameters as s3p
 import src.s3.keys
+import src.sources.maps
+import src.sources.reference
 
 
 class Interface:
@@ -30,26 +32,46 @@ class Interface:
         self.__s3_parameters = s3_parameters
 
         # Instances
-        self.__maps = src.acquire.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
+        self.__maps = src.sources.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
+        self.__backgrounds = src.cartography.backgrounds.Backgrounds(connector=connector)()
+        self.__reference = src.sources.reference.Reference(s3_parameters=self.__s3_parameters).exc()
 
-    def exc(self, codes: pd.DataFrame):
+    def __codes(self) -> pd.DataFrame:
         """
 
-        :param codes: ['catchment_id', 'ts_id']
+        :return:
+            codes: ['catchment_id', 'ts_id']
+        """
+
+        codes = self.__reference[['catchment_id', 'ts_id']].drop_duplicates()
+
+        return codes
+
+    def exc(self):
+        """
+        © Europa Technologies Ltd. Contains Ordnance Survey data © Crown copyright and database
+
         :return:
         """
+
+        codes = self.__codes()
 
         # Maps
         coarse = self.__maps.exc(key_name='cartography/coarse.geojson')
         care = self.__maps.exc(key_name='cartography/care_and_coarse_catchments.geojson')
         schools = self.__maps.exc(key_name='cartography/sch-catchments.geojson')
-        reference = src.acquire.reference.Reference(s3_parameters=self.__s3_parameters).exc()
 
         # Thus far, points vis-à-vis care homes and gauge stations.
         points: geopandas.GeoDataFrame = src.cartography.points.Points(
-            care=care, schools=schools, reference=reference).exc()
-        logging.info(points)
+            care=care, schools=schools, reference=self.__reference).exc()
 
         # Draw
-        src.cartography.illustrate.Illustrate(
-            points=points, coarse=coarse, codes=codes).exc(_name='assets')
+        __illustrate = dask.delayed(src.cartography.illustrate.Illustrate(
+            points=points, coarse=coarse, codes=codes).exc)
+
+        computations = []
+        for background in self.__backgrounds:
+            message = __illustrate(background=background)
+            computations.append(message)
+        messages = dask.compute(computations, scheduler='processes')
+        logging.info(messages)
