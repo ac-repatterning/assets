@@ -53,7 +53,7 @@ class Backgrounds:
              'filename': 'assets', 'zoom_start': 7, 'min_zoom': 0, 'max_zoom': 19, 'crs': 'EPSG3857'},
             {'tiles': 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}.png',
              'attr': 'Tiles &copy; Esri &mdash; Esri',
-             'filename': 'esri', 'zoom_start': 8, 'min_zoom': 8, 'max_zoom': 17, 'crs': 'EPSG3857'}
+             'filename': 'esri', 'zoom_start': 7, 'min_zoom': 7, 'max_zoom': 19, 'crs': 'EPSG3857'}
         ]
 
         return dictionary
