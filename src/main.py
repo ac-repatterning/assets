@@ -19,7 +19,7 @@ def main():
     logger.info('Starting: %s', datetime.datetime.now().isoformat(timespec='microseconds'))
 
     # fetching the gauge station codes
-    codes = src.acquire.interface.Interface(
+    codes = src.sources.interface.Interface(
         service=service, s3_parameters=s3_parameters, arguments=arguments).exc()
 
     # drawing
@@ -47,7 +47,7 @@ if __name__ == '__main__':
                         datefmt='%Y-%m-%d %H:%M:%S')
 
     # Modules
-    import src.acquire.interface
+    import src.sources.interface
     import src.cartography.interface
     import src.elements.service as sr
     import src.elements.s3_parameters as s3p
