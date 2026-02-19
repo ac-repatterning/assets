@@ -80,7 +80,7 @@ class Illustrate:
             data=self.__coarse,
             name='Boundaries',
             style_function=lambda feature: {
-                "fillColor": "#ffffff", "color": "black", "opacity": 0.85, "weight": 0.95, "dashArray": "5, 2"
+                "fillColor": "#6b8e23", "fillOpacity": 0.05, "color": "black", "opacity": 0.85, "weight": 0.95, "dashArray": "5, 2"
             },
             tooltip=folium.GeoJsonTooltip(fields=["catchment_name"], aliases=["Catchment Name"]),
             control=False,
