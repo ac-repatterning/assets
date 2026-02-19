@@ -58,6 +58,16 @@ class Illustrate:
     def exc(self, background: collections.namedtuple) -> str:
         """
 
+        clustering_schools = folium.plugins.MarkerCluster(overlay=True, control=False, name='Schools')
+        for i in range(schools.shape[0]):
+            marking_schools = folium.Marker(
+                location=[schools.iloc[i]['latitude'], schools.iloc[i]['longitude']],
+                tooltip= '<b>' + schools.iloc[i]['school_name'] + '</b><br>' + schools.iloc[i]['level'],
+                icon=folium.Icon(prefix='fa', icon='book', icon_size=(0.5,0.5), color='white', icon_color='#504f10')
+            )
+            clustering_schools.add_child(marking_schools)
+        clustering_schools.add_to(vector)
+
         :param background: A namedtuple about a background map
         :return:
         """
@@ -80,7 +90,8 @@ class Illustrate:
             data=self.__coarse,
             name='Boundaries',
             style_function=lambda feature: {
-                "fillColor": "#6b8e23", "fillOpacity": 0.20, "color": "black", "opacity": 0.85, "weight": 0.95, "dashArray": "5, 2"
+                "fillColor": "#6b8e23", "fillOpacity": 0.20, "color": "black", "opacity": 0.85,
+                "weight": 0.95, "dashArray": "5, 2"
             },
             tooltip=folium.GeoJsonTooltip(fields=["catchment_name"], aliases=["Catchment Name"]),
             control=False,
@@ -98,9 +109,9 @@ class Illustrate:
             vector = folium.FeatureGroup(name=parcel.catchment_name, show=show)
 
             # gauges, care homes, schools
+            # schools: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='schools')
             instances: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='gauge')
             leaves: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='elders')
-            schools: geopandas.GeoDataFrame = self.__get_focus(catchment_id=parcel.catchment_id, focus='schools')
 
             # Gauges
             on_each_feature = folium.utilities.JsCode(self.__metadata())
@@ -117,20 +128,6 @@ class Illustrate:
                 zoom_on_click=True,
                 on_each_feature=on_each_feature # popup=folium.GeoJsonPopup(fields=['railway'], aliases=[''])
             ).add_to(vector)
-
-
-            '''
-            # Schools
-            clustering_schools = folium.plugins.MarkerCluster(overlay=True, control=False, name='Schools')
-            for i in range(schools.shape[0]):
-                marking_schools = folium.Marker(
-                    location=[schools.iloc[i]['latitude'], schools.iloc[i]['longitude']],
-                    tooltip= '<b>' + schools.iloc[i]['school_name'] + '</b><br>' + schools.iloc[i]['level'],
-                    icon=folium.Icon(prefix='fa', icon='book', icon_size=(0.5,0.5), color='white', icon_color='#504f10')
-                )
-                clustering_schools.add_child(marking_schools)
-            clustering_schools.add_to(vector)
-            '''
 
             # Care
             for i in range(leaves.shape[0]):
