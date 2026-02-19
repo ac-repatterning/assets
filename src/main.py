@@ -18,10 +18,6 @@ def main():
     logger: logging.Logger = logging.getLogger(__name__)
     logger.info('Starting: %s', datetime.datetime.now().isoformat(timespec='microseconds'))
 
-    # fetching the gauge station codes
-    # codes = src.sources.interface.Interface(
-    #     service=service, s3_parameters=s3_parameters, arguments=arguments).exc()
-
     # drawing
     src.cartography.interface.Interface(
         s3_parameters=s3_parameters, connector=connector).exc()
