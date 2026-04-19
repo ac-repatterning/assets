@@ -1,4 +1,5 @@
 """Module cartography/illustrate.py"""
+
 import collections
 import os
 
