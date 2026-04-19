@@ -84,6 +84,5 @@ class Points:
 
         # Concatenating
         data = pd.concat([care, schools, reference], axis=0, ignore_index=True)
-        data.info()
 
         return data
