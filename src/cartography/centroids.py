@@ -1,4 +1,5 @@
 """Module centroids.py"""
+
 import typing
 
 import geopandas
