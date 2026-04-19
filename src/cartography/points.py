@@ -1,4 +1,5 @@
 """Module cartography/points.py"""
+
 import geopandas
 import pandas as pd
 
