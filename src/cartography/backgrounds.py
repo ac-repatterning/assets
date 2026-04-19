@@ -1,6 +1,6 @@
 """Module backgrounds.py"""
+
 import collections
-import logging
 
 import boto3
 
@@ -70,8 +70,5 @@ class Backgrounds:
             typename = 'Background',
             field_names=['tiles', 'attr', 'filename', 'zoom_start', 'min_zoom', 'max_zoom', 'crs'], defaults={'attr': None})
         __backgrounds: list[Background] = [Background(**elements) for elements in dictionary]
-
-        for background in __backgrounds:
-            logging.info(background.filename)
 
         return __backgrounds
